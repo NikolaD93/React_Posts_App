@@ -1,0 +1,83 @@
+.add-comment-form {
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 2rem;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+  }
+  button {
+    margin-top: 10px;
+  }
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.comments-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  text-align: center;
+  h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+}
+
+.comments-content {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 500px;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+  position: relative;
+  @media (min-width: 320px) and (max-width: 593px) {
+    width: 300px;
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    h3 {
+      color: #000;
+    }
+    small {
+      font-style: italic;
+      color: #4f4f4f;
+      font-weight: bold;
+    }
+  }
+  span {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    .icon {
+      margin-right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      &:hover {
+        transform: scale(1.3);
+      }
+    }
+  }
+  p {
+    letter-spacing: 1.4px;
+    font-style: italic;
+    font-weight: bold;
+    color: #4f4f4f;
+    text-align: left;
+  }
+}
