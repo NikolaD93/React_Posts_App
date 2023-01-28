@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import "./comments.scss";
+import "./posts.scss";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { Button } from "../common/Button";
 import { TextInput, TextArea } from "../common/Inputs";
-import { data } from "../constants/data";
 import { BACKEND_API } from "../environment/Api";
-import audio_error from "../assets/error-sound.mp3";
-import audio_pop from "../assets/pop-sound.mp3";
 
-const Comments = () => {
-  const [comments, setComments] = useState([]);
+const Posts = () => {
+  const [posts, setPosts] = useState([]);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const [editCom, setEditCom] = useState({
+  const [editPost, setEditPost] = useState({
     mode: false,
     id: "",
     title: "",
@@ -47,7 +44,7 @@ const Comments = () => {
       }
 
       if (title === "" || content === "") {
-        alert("First you must fill input section");
+        alert("Please fill out input fields");
       }
 
       window.location.reload(true);
@@ -57,7 +54,7 @@ const Comments = () => {
   };
 
   useEffect(() => {
-    const fetchComments = async () => {
+    const fetchPosts = async () => {
       const url = `${BACKEND_API}/api/v1/comments`;
 
       const token = JSON.parse(localStorage.getItem("token"));
@@ -71,17 +68,17 @@ const Comments = () => {
         const data = await response.json();
 
         if (response.status === 200) {
-          setComments(data);
+          setPosts(data);
         }
       } catch (err) {
         console.log(err);
       }
     };
 
-    fetchComments();
+    fetchPosts();
   }, []);
 
-  const removeComment = async (id) => {
+  const removePost = async (id) => {
     const url = `${BACKEND_API}/api/v1/comments/${id}`;
 
     const token = JSON.parse(localStorage.getItem("token"));
@@ -90,7 +87,7 @@ const Comments = () => {
     try {
       const response = await fetch(url, { method: "DELETE", headers: headers });
       if (response.status === 200) {
-        setComments(comments.filter((com) => com.id !== id));
+        setPosts(posts.filter((com) => com.id !== id));
       }
     } catch (err) {
       console.log(err);
@@ -114,11 +111,11 @@ const Comments = () => {
         headers: headers,
       });
 
-      setEditCom({
+      setEditPost({
         mode: true,
-        id: comments[idx].id,
-        title: comments[idx].title,
-        content: comments[idx].content,
+        id: posts[idx].id,
+        title: posts[idx].title,
+        content: posts[idx].content,
       });
     } catch (err) {
       console.log(err);
@@ -126,12 +123,12 @@ const Comments = () => {
   };
 
   useEffect(() => {
-    setTitle(editCom.title);
-    setContent(editCom.content);
-  }, [editCom]);
+    setTitle(editPost.title);
+    setContent(editPost.content);
+  }, [editPost]);
 
   const exitEditMode = () => {
-    setEditCom({
+    setEditPost({
       mode: false,
       id: "",
       title: "",
@@ -140,28 +137,20 @@ const Comments = () => {
   };
 
   const updateEditMode = () => {
-    let tempComments = [...comments];
-    tempComments.forEach((com, idx) => {
-      if (editCom.id === com.id) {
-        tempComments[idx].title = title;
-        tempComments[idx].content = content;
+    let tempPosts = [...posts];
+    tempPosts.forEach((com, idx) => {
+      if (editPost.id === com.id) {
+        tempPosts[idx].title = title;
+        tempPosts[idx].content = content;
       }
     });
 
-    setEditCom({
+    setEditPost({
       mode: false,
       id: "",
       title: "",
       content: "",
     });
-  };
-
-  const playAudioError = () => {
-    new Audio(audio_error).play();
-  };
-
-  const playAudioPop = () => {
-    new Audio(audio_pop).play();
   };
 
   const [visible, setVisible] = useState(true);
@@ -170,11 +159,10 @@ const Comments = () => {
   };
 
   return (
-    <section className="page-container">
-
-      {!editCom.mode ? (
+    <section className="section__wrapper">
+      {!editPost.mode ? (
         <article className="add-comment-form">
-          <h2>Add new comment</h2>
+          <h2>Add New Post</h2>
           <form onSubmit={handleSubmit}>
             <TextInput
               type="text"
@@ -191,12 +179,12 @@ const Comments = () => {
               onChange={(e) => setContent(e.target.value)}
               value={content}
             />
-            <Button onClick={() => removeElement()}>Add comment</Button>
+            <Button onClick={() => removeElement()}>Add post</Button>
           </form>
         </article>
       ) : (
         <article className="add-comment-form">
-          <h2>Edit comment</h2>
+          <h2>Edit post</h2>
           <form>
             <TextInput
               type="text"
@@ -212,75 +200,48 @@ const Comments = () => {
               value={content}
             />
             <div className="cta">
-              <Button onClick={updateEditMode}>Update comment</Button>
-              <Button onClick={exitEditMode}>Get back</Button>
+              <Button onClick={updateEditMode}>Update</Button>
+              <Button onClick={exitEditMode}>Cancel</Button>
             </div>
           </form>
         </article>
       )}
 
-
-      <article className="comments-header">
-        <h1>Comments</h1>
-
-        {/* dummy comments */}
-
-        {data.map((com) => {
-          return (
-            <div className="comments-content" key={com.id}>
-              <div className="header-content">
-                <h3>{com.title}</h3>
+      <article className="posts_wrapper">
+        <h2>Posts</h2>
+        {posts.length === 0 ? (
+          <h4>No posts to display</h4>
+        ) : (
+          posts.map((com, idx) => {
+            return (
+              <div className="posts__content" key={com.id}>
+                <div className="header__content">
+                  <h3>{com.title}</h3>
+                  <small>{com.createdAt.substring(0, 10)}</small>/
+                  <small>{com.createdAt.substring(11, 16)}</small>
+                </div>
+                <span>
+                  <AiOutlineEdit
+                    className="icon"
+                    onClick={() => {
+                      editComment(com.id, idx);
+                    }}
+                  />
+                  <AiOutlineDelete
+                    className="icon"
+                    onClick={() => {
+                      removePost(com.id);
+                    }}
+                  />
+                </span>
+                <p>{com.content}</p>
               </div>
-              <span>
-                <AiOutlineEdit
-                  className="icon"
-                  style={{ cursor: "not-allowed" }}
-                  onClick={playAudioError}
-                />
-                <AiOutlineDelete
-                  className="icon"
-                  style={{ cursor: "not-allowed" }}
-                  onClick={playAudioError}
-                />
-              </span>
-              <p>{com.content}</p>
-            </div>
-          );
-        })}
-
-        {/* real comments */}
-
-        {comments.map((com, idx) => {
-          return (
-            <div className="comments-content" key={com.id}>
-              <div className="header-content">
-                <h3>{com.title}</h3>
-                <small>{com.createdAt.substring(0, 10)}</small>/
-                <small>{com.createdAt.substring(11, 16)}</small>
-              </div>
-              <span>
-                <AiOutlineEdit
-                  className="icon"
-                  onClick={() => {
-                    editComment(com.id, idx);
-                    playAudioPop();
-                  }}
-                />
-                <AiOutlineDelete
-                  className="icon"
-                  onClick={() => {
-                    removeComment(com.id);
-                    playAudioPop();
-                  }}
-                />
-              </span>
-              <p>{com.content}</p>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </article>
     </section>
   );
 };
 
-export default Comments;
+export default Posts;

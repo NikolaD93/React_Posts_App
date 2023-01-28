@@ -1,0 +1,21 @@
+.section__wrapper {
+  position: relative;
+  z-index: 3;
+  min-width: 100%;
+  margin: 0 20px;
+  padding: 40px 50px;
+  border-radius: 1.25rem;
+  background: rgba(0, 18, 32, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(33, 108, 231, 0.37);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 10px;
+  display: flex;
+  @media (width >= 200px) {
+    margin: 0;
+    width: 500px;
+  }
+  .posts_wrapper{
+    border: 2px solid white;
+  }
+}

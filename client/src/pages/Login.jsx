@@ -11,7 +11,8 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const url = `${BACKEND_API}/auth`;
     const jsonBody = JSON.stringify({
       username: username,
@@ -32,7 +33,7 @@ const Login = () => {
       localStorage.setItem("token", JSON.stringify(token));
 
       if (response.status === 200) {
-        navigate("/comments");
+        navigate("/posts");
       }
     } catch (err) {
       console.log(err);
@@ -40,9 +41,10 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
+    <div className="login__wrapper">
       <h2>Log in</h2>
-      <form>
+      <h3>Enter your credentials</h3>
+      <form onSubmit={handleSubmit} className="login__form">
         <TextInput
           type="text"
           label="Username"
@@ -58,8 +60,8 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
+        <Button>Log in</Button>
       </form>
-      <Button onClick={handleSubmit}>Log in</Button>
     </div>
   );
 };

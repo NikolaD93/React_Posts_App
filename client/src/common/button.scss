@@ -1,15 +1,22 @@
-.custom-button {
-    padding: 10px 25px;
-    border-radius: 10px;
-    border: 2px solid #fff;
-    background-color: transparent;
-    font-weight: bold;
-    color: #fff;
+button{
     cursor: pointer;
-    transition: all 0.3s;
-    &:hover {
-        background-color: #fff;
-        color: #2e5089;
+    width: 50%;
+    height: 40px;
+    margin: 20px auto 0 auto;
+    padding: 0 16px;
+    border-radius: 0.5rem;
+    background: #216ce7;
+    color: #f9f9f9;
+    border: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    transition: all 0.375s;
+    &:hover{
+        background: white;
+        color: #216ce7;
     }
 }
 

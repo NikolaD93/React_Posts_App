@@ -2,7 +2,7 @@ import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Comments from "./pages/Comments";
+import Posts from "./pages/Posts";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/comments" element={<Comments />} />
+          <Route path="/posts" element={<Posts />} />
         </Routes>
     </div>
   );
