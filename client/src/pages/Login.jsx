@@ -47,16 +47,15 @@ const Login = () => {
       <form onSubmit={handleSubmit} className="login__form">
         <TextInput
           type="text"
-          label="Username"
           id="username"
-          placeholder="ex. JohnDoe123"
+          placeholder="User Name"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
         />
         <TextInput
           type="password"
-          label="Password"
           id="password"
+          placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />

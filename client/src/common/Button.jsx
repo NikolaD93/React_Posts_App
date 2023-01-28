@@ -1,8 +1,8 @@
-import "./button.scss"
+import "./button.scss";
 
-export const Button = ({ children, onClick }) => {
+export const Button = ({ children, onClick, disabled }) => {
   return (
-    <button onClick={() => onClick()}>
+    <button onClick={() => onClick()} disabled={disabled}>
       {children}
     </button>
   );

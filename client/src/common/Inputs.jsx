@@ -1,22 +1,24 @@
 import "./inputs.scss";
 
 export const TextInput = ({
-  label,
   value,
   id,
   onChange,
   type,
   placeholder,
+  onFocus,
+  onBlur,
 }) => {
   return (
     <div className="input__wrapper">
-      <div className="label">{label}</div>
       <input
         type={type}
         value={value}
         onChange={onChange}
         id={id}
         placeholder={placeholder}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </div>
   );
