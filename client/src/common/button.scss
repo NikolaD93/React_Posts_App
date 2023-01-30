@@ -18,5 +18,9 @@ button{
         background: white;
         color: #216ce7;
     }
+    &:disabled{
+        opacity: .4;
+        cursor: not-allowed;
+    }
 }
 
