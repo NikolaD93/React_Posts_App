@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./register.scss";
 import { Button } from "../common/Button";
 import { TextInput } from "../common/Inputs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { BACKEND_API } from "../environment/Api";
 import successIcon from "../assets/success_icon.svg";
 import { FaTimes, FaCheckSquare, FaInfoCircle } from "react-icons/fa";
@@ -11,14 +11,14 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
-  const navigate = useNavigate();
-
-  const [firstName, setFristName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [validFirstName, setValidFirstName] = useState(false);
   const [firstNameFocus, setFirstNameFocus] = useState(false);
-  console.log(firstNameFocus);
 
   const [lastName, setLastName] = useState("");
+  const [validLastName, setValidLastName] = useState(false);
+  const [lastNameFocus, setLastNameFocus] = useState(false);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
@@ -27,10 +27,13 @@ const Register = () => {
 
   useEffect(() => {
     const result = USER_REGEX.test(firstName);
-    console.log(result);
-    console.log(firstName);
     setValidFirstName(result);
   }, [firstName]);
+
+  useEffect(() => {
+    const result = USER_REGEX.test(lastName);
+    setValidLastName(result);
+  }, [lastName]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +52,6 @@ const Register = () => {
       });
 
       if (response.status === 200) {
-        // navigate("/login");
         setSuccess(true);
       }
     } catch (err) {
@@ -84,7 +86,7 @@ const Register = () => {
               type="text"
               id="firstName"
               placeholder="First Name"
-              onChange={(e) => setFristName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
               value={firstName}
               onFocus={() => setFirstNameFocus(true)}
               onBlur={() => setFirstNameFocus(false)}
@@ -97,19 +99,39 @@ const Register = () => {
               }
             >
               <FaInfoCircle className="info_circle" />
-              4 to 24 characters.
+              5 to 25 characters.
               <br />
               Must begin with a letter! No spaces allowed.
               <br />
               Letters, numbers, underscores, hyphens allowed.
             </p>
+            <FaCheckSquare className={validLastName ? "valid" : "hide"} />
+            <FaTimes
+              className={validLastName || !lastName ? "hide" : "invalid"}
+            />
             <TextInput
               type="text"
               id="lastName"
               placeholder="Last Name"
               onChange={(e) => setLastName(e.target.value)}
               value={lastName}
+              onFocus={() => setLastNameFocus(true)}
+              onBlur={() => setLastNameFocus(false)}
             />
+             <p
+              className={
+                !validLastName && lastNameFocus && lastName
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FaInfoCircle className="info_circle" />
+              5 to 25 characters.
+              <br />
+              Must begin with a letter! No spaces allowed.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
             <TextInput
               type="text"
               id="username"
@@ -124,7 +146,7 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
-            <Button disabled={!validFirstName ? true : false}>Register</Button>
+            <Button disabled={!validFirstName || !validLastName ? true : false}>Register</Button>
             <Link className="link" to="/login">
               Already have an account?
             </Link>
