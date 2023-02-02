@@ -20,6 +20,9 @@ const Register = () => {
   const [lastNameFocus, setLastNameFocus] = useState(false);
 
   const [username, setUsername] = useState("");
+  const [validUserName, setValidUserName] = useState(false);
+  const [userNameFocus, setUserNameFocus] = useState(false);
+
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -34,6 +37,11 @@ const Register = () => {
     const result = USER_REGEX.test(lastName);
     setValidLastName(result);
   }, [lastName]);
+
+  useEffect(() => {
+    const result = USER_REGEX.test(username);
+    setValidUserName(result);
+  }, [username]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +126,7 @@ const Register = () => {
               onFocus={() => setLastNameFocus(true)}
               onBlur={() => setLastNameFocus(false)}
             />
-             <p
+            <p
               className={
                 !validLastName && lastNameFocus && lastName
                   ? "instructions"
@@ -132,13 +140,33 @@ const Register = () => {
               <br />
               Letters, numbers, underscores, hyphens allowed.
             </p>
+            <FaCheckSquare className={validUserName ? "valid" : "hide"} />
+            <FaTimes
+              className={validUserName || !username ? "hide" : "invalid"}
+            />
             <TextInput
               type="text"
               id="username"
               placeholder="User Name"
               onChange={(e) => setUsername(e.target.value)}
               value={username}
+              onFocus={() => setUserNameFocus(true)}
+              onBlur={() => setUserNameFocus(false)}
             />
+            <p
+              className={
+                !validUserName && userNameFocus && username
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FaInfoCircle className="info_circle" />
+              5 to 25 characters.
+              <br />
+              Must begin with a letter! No spaces allowed.
+              <br />
+              Letters, numbers, underscores, hyphens allowed.
+            </p>
             <TextInput
               type="password"
               id="password"
@@ -146,7 +174,9 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
-            <Button disabled={!validFirstName || !validLastName ? true : false}>Register</Button>
+            <Button disabled={!validFirstName || !validLastName || !validUserName ? true : false}>
+              Register
+            </Button>
             <Link className="link" to="/login">
               Already have an account?
             </Link>
