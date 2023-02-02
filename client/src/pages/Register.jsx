@@ -8,7 +8,7 @@ import successIcon from "../assets/success_icon.svg";
 import { FaTimes, FaCheckSquare, FaInfoCircle } from "react-icons/fa";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -24,6 +24,9 @@ const Register = () => {
   const [userNameFocus, setUserNameFocus] = useState(false);
 
   const [password, setPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
+
   const [success, setSuccess] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
@@ -42,6 +45,11 @@ const Register = () => {
     const result = USER_REGEX.test(username);
     setValidUserName(result);
   }, [username]);
+
+  useEffect(() => {
+    const result = PWD_REGEX.test(password);
+    setValidPassword(result);
+  }, [password]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -167,14 +175,49 @@ const Register = () => {
               <br />
               Letters, numbers, underscores, hyphens allowed.
             </p>
+            <FaCheckSquare className={validPassword ? "valid" : "hide"} />
+            <FaTimes
+              className={validPassword || !password ? "hide" : "invalid"}
+            />
             <TextInput
               type="password"
               id="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
+              onFocus={() => setPasswordFocus(true)}
+              onBlur={() => setPasswordFocus(false)}
             />
-            <Button disabled={!validFirstName || !validLastName || !validUserName ? true : false}>
+            <p
+              className={
+                !validPassword && passwordFocus && password
+                  ? "instructions"
+                  : "offscreen"
+              }
+            >
+              <FaInfoCircle className="info_circle" />
+              8 to 24 characters.
+              <br />
+              Must include a letter, a number and a
+              special character.
+              <br />
+              Allowed special characters:{" "}
+              <span aria-label="exclamation mark">!</span>{" "}
+              <span aria-label="at symbol">@</span>{" "}
+              <span aria-label="hashtag">#</span>{" "}
+              <span aria-label="dollar sign">$</span>{" "}
+              <span aria-label="percent">%</span>
+            </p>
+            <Button
+              disabled={
+                !validFirstName ||
+                !validLastName ||
+                !validUserName ||
+                !validPassword
+                  ? true
+                  : false
+              }
+            >
               Register
             </Button>
             <Link className="link" to="/login">
