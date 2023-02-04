@@ -5,5 +5,6 @@ Used a backend server to fetch the data. Implemented user authentication using J
 User is able to:
 
 
-* View the optimal layout for the site depending on their device's screen size
-* See hover states for all interactive elements on the page
+* Register/create an account
+* Login to the app
+* Make a new post, delete and modify an existing post
