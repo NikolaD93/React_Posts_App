@@ -5,5 +5,5 @@ Used a backend server to fetch the data. Implemented user authentication using J
 User is able to:
 
 
-*View the optimal layout for the site depending on their device's screen size
-*See hover states for all interactive elements on the page
+* View the optimal layout for the site depending on their device's screen size
+* See hover states for all interactive elements on the page
