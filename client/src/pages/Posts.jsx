@@ -168,14 +168,14 @@ const Posts = () => {
               type="text"
               label="User"
               id="title"
-              placeholder="ex. John Doe"
+              placeholder="Enter title"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
             />
             <TextArea
               label="Comment"
               id="content"
-              placeholder="ex. Lorem ipsum dolor sit amet"
+              placeholder="Enter post content"
               onChange={(e) => setContent(e.target.value)}
               value={content}
             />
@@ -216,10 +216,9 @@ const Posts = () => {
             return (
               <div className="posts__content" key={com.id}>
                 <div className="header__content">
-                  <h3>{com.title}</h3>
-                  <small>{com.createdAt.substring(0, 10)}</small>/
-                  <small>{com.createdAt.substring(11, 16)}</small>
+                  <h3>Title: {com.title}</h3>
                 </div>
+                <p>Content: {com.content}</p>
                 <span>
                   <AiOutlineEdit
                     className="icon"
@@ -234,7 +233,8 @@ const Posts = () => {
                     }}
                   />
                 </span>
-                <p>{com.content}</p>
+                <small>{com.createdAt.substring(0, 10)}</small>/
+                <small>{com.createdAt.substring(11, 16)}</small>
               </div>
             );
           })

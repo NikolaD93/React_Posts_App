@@ -1,7 +1,7 @@
 .section__wrapper {
   position: relative;
   z-index: 3;
-  min-width: 100%;
+  min-width: 800px;
   margin: 0 20px;
   padding: 40px 50px;
   border-radius: 1.25rem;
@@ -11,11 +11,14 @@
   -webkit-backdrop-filter: blur(6px);
   border-radius: 10px;
   display: flex;
-  @media (width >= 200px) {
-    margin: 0;
-    width: 500px;
+  justify-content: space-between;
+  .add-comment-form{
+    flex: 0 0 48%;
+    text-align: center;
+    
   }
   .posts_wrapper{
-    border: 2px solid white;
+    flex: 0 0 48%;
+    text-align: center;
   }
 }

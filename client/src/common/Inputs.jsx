@@ -24,12 +24,10 @@ export const TextInput = ({
   );
 };
 
-export const TextArea = ({ label, value, id, onChange, type, placeholder }) => {
+export const TextArea = ({ value, id, onChange, type, placeholder }) => {
   return (
-    <div className="texarea__wrapper">
-      <div className="label">{label}</div>
+    <div className="textarea__wrapper">
       <textarea
-        style={{ resize: "none" }}
         type={type}
         value={value}
         onChange={onChange}
