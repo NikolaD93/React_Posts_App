@@ -9,6 +9,8 @@ User is able to:
 * Login to the app
 * Make a new post, delete and modify an existing post
 
-![register](https://user-images.githubusercontent.com/95870159/216766340-5b3a983e-af68-42f6-b9d5-6d750853f5b2.png)
+![registerpng](https://user-images.githubusercontent.com/95870159/217366863-9b69358b-59ce-463f-a2cf-a591c2c18088.png)
 
-![login](https://user-images.githubusercontent.com/95870159/216766345-c99c7a9d-7db7-4e9c-a846-b876efecf5a9.png)
+![login](https://user-images.githubusercontent.com/95870159/217366913-1a8c1f7a-81af-49d9-ac48-23af22fdb0ea.png)
+
+![React-Posts-App](https://user-images.githubusercontent.com/95870159/217366932-5b97e493-179d-43aa-9ff8-6bfba9a298ce.png)
