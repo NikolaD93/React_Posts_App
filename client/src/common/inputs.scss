@@ -8,11 +8,13 @@
     padding: 0 16px;
     border-radius: 0.5rem;
     outline: none;
-    border: none;
+    border: 3px solid #216ce7;
     transition: all 0.375s;
     margin-bottom: 15px;
+    background-color: transparent;
+    color: white;
     &:focus {
-      outline: 4px solid #216ce7;
+      box-shadow: 0 0px 20px 0 #216ce7;
     }
   }
 }
@@ -27,12 +29,14 @@
     padding: 16px;
     border-radius: 0.5rem;
     outline: none;
-    border: none;
+    border: 3px solid #216ce7;
     transition: all 0.375s;
     margin-bottom: 15px;
     resize: none;
+    background-color: transparent;
+    color: white;
     &:focus {
-      outline: 4px solid #216ce7;
+      box-shadow: 0 0px 20px 0 #216ce7;
     }
   }
 }
