@@ -91,7 +91,7 @@ const Register = ({ username, setUsername, password, setPassword }) => {
           </p>
           <h2>Register</h2>
           <h3>Fill out requested fields</h3>
-          <form onSubmit={handleSubmit} className="register__form">
+          <form onSubmit={handleSubmit} className="register__form" autoComplete="off">
             <div className="input__wrapper">
               <FaCheckCircle className={validFirstName ? "valid" : "hide"} />
               <FaTimes

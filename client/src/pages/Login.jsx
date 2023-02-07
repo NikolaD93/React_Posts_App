@@ -59,7 +59,7 @@ const Login = ({ username, password }) => {
         <div className="login__wrapper">
           <h2>Log in</h2>
           <h3>Enter your credentials</h3>
-          <form onSubmit={handleSubmit} className="login__form">
+          <form onSubmit={handleSubmit} className="login__form" autoComplete="off">
             <TextInput
               type="text"
               id="inputUsername"

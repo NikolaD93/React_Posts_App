@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./posts.scss";
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
+import { RiDeleteBin6Line, RiEditBoxLine } from "react-icons/ri";
 import { Button } from "../common/Button";
 import { TextInput, TextArea } from "../common/Inputs";
 import { BACKEND_API } from "../environment/Api";
@@ -44,7 +44,7 @@ const Posts = () => {
       }
 
       if (title === "" || content === "") {
-        alert("Please fill out input fields");
+        alert("Please fill out both the title and content")
       }
 
       window.location.reload(true);
@@ -168,14 +168,14 @@ const Posts = () => {
               type="text"
               label="User"
               id="title"
-              placeholder="Enter title"
+              placeholder="Title"
               onChange={(e) => setTitle(e.target.value)}
               value={title}
             />
             <TextArea
               label="Comment"
               id="content"
-              placeholder="Enter post content"
+              placeholder="Content"
               onChange={(e) => setContent(e.target.value)}
               value={content}
             />
@@ -199,8 +199,8 @@ const Posts = () => {
               onChange={(e) => setContent(e.target.value)}
               value={content}
             />
-            <div className="cta">
-              <Button onClick={updateEditMode}>Update</Button>
+            <div className="buttons">
+              <Button onClick={updateEditMode}>Save</Button>
               <Button onClick={exitEditMode}>Cancel</Button>
             </div>
           </form>
@@ -215,26 +215,32 @@ const Posts = () => {
           posts.map((com, idx) => {
             return (
               <div className="posts__content" key={com.id}>
-                <div className="header__content">
-                  <h3>Title: {com.title}</h3>
+                <div className="top">
+                  <h3>{com.title}</h3>
+                  <p>{com.content}</p>
                 </div>
-                <p>Content: {com.content}</p>
-                <span>
-                  <AiOutlineEdit
-                    className="icon"
-                    onClick={() => {
-                      editComment(com.id, idx);
-                    }}
-                  />
-                  <AiOutlineDelete
-                    className="icon"
-                    onClick={() => {
-                      removePost(com.id);
-                    }}
-                  />
-                </span>
-                <small>{com.createdAt.substring(0, 10)}</small>/
-                <small>{com.createdAt.substring(11, 16)}</small>
+                <div className="bottom">
+                  <div className="icons">
+                    <span>
+                      <RiEditBoxLine
+                        className="icon"
+                        onClick={() => {
+                          editComment(com.id, idx);
+                        }}
+                      />
+                      <RiDeleteBin6Line
+                        className="icon"
+                        onClick={() => {
+                          removePost(com.id);
+                        }}
+                      />
+                    </span>
+                  </div>
+                  <div className="time">
+                    <small>{com.createdAt.substring(0, 10)}</small> |
+                    <small> {com.createdAt.substring(11, 16)}</small>
+                  </div>
+                </div>
               </div>
             );
           })

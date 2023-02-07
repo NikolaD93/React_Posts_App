@@ -3,7 +3,7 @@
   z-index: 3;
   min-width: 800px;
   margin: 0 20px;
-  padding: 40px 50px;
+  padding: 40px;
   border-radius: 1.25rem;
   background: rgba(0, 18, 32, 0.2);
   box-shadow: 0 8px 32px 0 rgba(33, 108, 231, 0.37);
@@ -15,10 +15,59 @@
   .add-comment-form{
     flex: 0 0 48%;
     text-align: center;
-    
+    .buttons{
+      display: flex;
+      gap: 20px;
+    }
   }
   .posts_wrapper{
-    flex: 0 0 48%;
+    flex: 0 0 44%;
     text-align: center;
+    h4{
+      line-height: 200px;
+      font-size: 1.4rem;
+      opacity: .5;
+    }
+    .posts__content{
+      max-width: 340px;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      border-radius: .75rem;
+      padding: 0 20px 10px;
+      margin-bottom: 20px;
+      .top{
+        p{
+          opacity: .5;
+          max-width: 340px;
+        }
+      }
+      .bottom{
+        display: flex;
+        justify-content: space-between;
+        .icons{
+          .icon:nth-child(1){
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: all 0.375s;
+            &:hover{
+              transform: scale(1.4);
+            }
+          }
+          .icon:nth-child(2){
+            font-size: 1.6rem;
+            cursor: pointer;
+            margin-left: 20px;
+            color: rgb(238, 15, 15);
+            transition: all 0.375s;
+            &:hover{
+              transform: scale(1.4);
+            }
+          }
+        }
+      }
+    }
   }
 }
