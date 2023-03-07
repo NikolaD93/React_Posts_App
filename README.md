@@ -1,6 +1,6 @@
 # React_Posts_App
 
-# [YT Video Preview](https://www.youtube.com/watch?v=Phcp9ITKSfE).
+# [YT Video Preview](https://www.youtube.com/watch?v=Phcp9ITKSfE)
 
 Used a backend server to fetch the data. Implemented user authentication using JWT token and HTTP request methods - GET, POST, PUT & DELETE for posting, editing and deleting comments.
 
