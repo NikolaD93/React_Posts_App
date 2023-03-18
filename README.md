@@ -1,15 +1,19 @@
 # React_Posts_App
 
-# [YT Video Preview](https://www.youtube.com/watch?v=Phcp9ITKSfE)
+## Technologies used:
+
+- `React.js` & `Scss` for frontend.
 
 Used a backend server to fetch the data. Implemented user authentication using JWT token and HTTP request methods - GET, POST, PUT & DELETE for posting, editing and deleting comments.
 
 User is able to:
 
-
 * Register/create an account
 * Login to the app
 * Make a new post, delete and modify an existing post
+
+# [YT Video Preview](https://www.youtube.com/watch?v=Phcp9ITKSfE)
+
 
 ![registerpng](https://user-images.githubusercontent.com/95870159/217366863-9b69358b-59ce-463f-a2cf-a591c2c18088.png)
 
