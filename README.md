@@ -3,7 +3,7 @@
 ## Technologies used:
 
 - `React.js` & `Scss` for frontend.
--  Server is made in `Golang`
+- `Golang` for backend.
 
 Used a backend server to fetch the data. Implemented user authentication using JWT token and HTTP request methods - GET, POST, PUT & DELETE for posting, editing and deleting comments.
 
